@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PP Pastry & Bakery</title>
+    <style>
+        :root {
+            --primary: #5D4037;
+            --secondary: #D7CCC8;
+            --accent: #FF7043;
+            --bg: #FFF8E1;
+            --text: #3E2723;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        /* --- 3D Hero Section --- */
+        header {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            perspective: 1000px;
+            background: radial-gradient(circle, #fff3e0 0%, #ffe0b2 100%);
+            overflow: hidden;
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 2;
+            transform-style: preserve-3d;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        h1 {
+            font-size: 5rem;
+            color: var(--primary);
+            text-shadow: 3px 3px 0px var(--secondary);
+            margin-bottom: 20px;
+            transform: translateZ(50px);
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: var(--accent);
+            font-weight: bold;
+            transform: translateZ(30px);
+        }
+
+        /* Floating 3D Cake Element */
+        .floating-cake {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: url('https://images.unsplash.com/photo-1578985545062-69928b1d9587?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80') no-repeat center center;
+            background-size: cover;
+            border-radius: 50%;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+            animation: spin 20s linear infinite;
+            transform-style: preserve-3d;
+            z-index: 1;
+            opacity: 0.8;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotateX(0deg); }
+            50% { transform: translateY(-20px) rotateX(5deg); }
+        }
+
+        @keyframes spin {
+            from { transform: rotateY(0deg); }
+            to { transform: rotateY(360deg); }
+        }
+
+        /* --- Menu Section --- */
+        .menu-section {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 50px;
+            color: var(--primary);
+            position: relative;
+        }
+
+        .cake-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            perspective: 1000px;
+        }
+
+        .cake-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            transition: transform 0.1s;
+            transform-style: preserve-3d;
+            cursor: pointer;
+            border: 2px solid var(--secondary);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .cake-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transform: translateZ(20px);
+        }
+
+        .cake-info {
+            padding: 20px;
+            text-align: center;
+            transform: translateZ(30px);
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .cake-name {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .order-btn {
+            background-color: var(--accent);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: background 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .order-btn:hover {
+            background-color: #E64A19;
+        }
+
+        /* --- Contact Section --- */
+        .contact-section {
+            background-color: var(--primary);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .contact-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 30px;
+        }
+
+        .contact-item {
+            background: rgba(255,255,255,0.1);
+            padding: 20px 40px;
+            border-radius: 10px;
+            backdrop-filter: blur(5px);
+            transform: translateZ(20px);
+            transition: transform 0.3s;
+        }
+
+        .contact-item:hover {
+            transform: translateZ(30px) scale(1.05);
+            background: rgba(255,255,255,0.2);
+        }
+
+        .contact-item h3 {
+            color: var(--accent);
+            margin-bottom: 10px;
+        }
+
+        .contact-link {
+            color: white;
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: color 0.3s;
+        }
+
+        .contact-link:hover {
+            color: var(--accent);
+            text-decoration: underline;
+        }
+
+        /* --- Footer --- */
+        footer {
+            background: #3E2723;
+            color: #aaa;
+            text-align: center;
+            padding: 20px;
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 3rem; }
+            .floating-cake { width: 200px; height: 200px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 3D Hero Section -->
+    <header>
+        <div class="floating-cake"></div>
+        <div class="hero-content">
+            <h1>PP Pastry & Bakery</h1>
+            <p class="hero-subtitle">Where Every Slice is a Masterpiece</p>
+        </div>
+    </header>
+
+    <!-- Menu Section -->
+    <section class="menu-section">
+        <h2 class="section-title">Our Sweet Creations</h2>
+        <div class="cake-grid" id="cakeGrid">
+            <!-- Cakes will be injected here by JavaScript -->
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section">
+        <h2>Visit Us Today</h2>
+        <div class="contact-grid">
+            <div class="contact-item">
+                <h3>📍 Location</h3>
+                <a href="https://www.google.com/maps/search/?api=1&query=Jiparka+road" target="_blank" class="contact-link">Jiparka Road</a>
+            </div>
+            <div class="contact-item">
+                <h3>📞 Phone</h3>
+                <a href="tel:9761332293" class="contact-link">9761332293</a>
+            </div>
+            <div class="contact-item">
+                <h3>✉️ Email</h3>
+                <a href="mailto:Parkhaspant123@gmail.com" class="contact-link">Parkhaspant123@gmail.com</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2023 PP Pastry & Bakery. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // --- YOUR IMAGE FILES HERE ---
+        // To use your own images:
+        // 1. Create a folder named 'images' next to this HTML file.
+        // 2. Put your photos in that folder (e.g., blackforest.jpg).
+        // 3. Change the 'img' links below to: 'images/blackforest.jpg'
+        
+        const cakes = [
+            { name: "Black Forest", img: "https://images.unsplash.com/photo-1571115177098-24ec42ed204d?auto=format&fit=crop&w=600&q=80" },
+            { name: "White Forest", img: "https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?auto=format&fit=crop&w=600&q=80" },
+            { name: "Chocolate Cake", img: "https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=600&q=80" },
+            { name: "Tiramisu", img: "https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?auto=format&fit=crop&w=600&q=80" },
+            { name: "Vanilla Cake", img: "https://images.unsplash.com/photo-1519869325930-281384150729?auto=format&fit=crop&w=600&q=80" },
+            { name: "Mango Mousse", img: "https://images.unsplash.com/photo-1565958011703-44f9829ba187?auto=format&fit=crop&w=600&q=80" },
+            { name: "Orange Mousse", img: "https://images.unsplash.com/photo-1565958011703-44f9829ba187?auto=format&fit=crop&w=600&q=80" },
+            { name: "Lemon Mousse", img: "https://images.unsplash.com/photo-1519915028121-7d3463d20b13?auto=format&fit=crop&w=600&q=80" },
+            { name: "Salted Caramel Cheesecake", img: "https://images.unsplash.com/photo-1533134242443-d4fd215305ad?auto=format&fit=crop&w=600&q=80" },
+            { name: "Vanilla Cheesecake", img: "https://images.unsplash.com/photo-1524351199678-941a58a3df50?auto=format&fit=crop&w=600&q=80" },
+            { name: "Strawberry Cheesecake", img: "https://images.unsplash.com/photo-1565958011703-44f9829ba187?auto=format&fit=crop&w=600&q=80" },
+            { name: "Chocolate Souffle", img: "https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?auto=format&fit=crop&w=600&q=80" },
+            { name: "Chocolate Lava", img: "https://images.unsplash.com/photo-1624353365286-3f8d62daad51?auto=format&fit=crop&w=600&q=80" }
+        ];
+
+        const grid = document.getElementById('cakeGrid');
+
+        // Generate HTML for cakes
+        cakes.forEach(cake => {
+            const card = document.createElement('div');
+            card.className = 'cake-card';
+            
+            // Create WhatsApp message
+            const message = `Hello PP Pastry, I would like to order a ${cake.name}.`;
+            const whatsappLink = `https://wa.me/9761332293?text=${encodeURIComponent(message)}`;
+
+            card.innerHTML = `
+                <img src="${cake.img}" alt="${cake.name}" class="cake-image">
+                <div class="cake-info">
+                    <h3 class="cake-name">${cake.name}</h3>
+                    <a href="${whatsappLink}" target="_blank" class="order-btn">Order Now</a>
+                </div>
+            `;
+            grid.appendChild(card);
+        });
+
+        // 3D Tilt Effect Logic
+        const cards = document.querySelectorAll('.cake-card');
+
+        cards.forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                const xRotation = -1 * ((y - rect.height / 2) / 10);
+                const yRotation = (x - rect.width / 2) / 10;
+                
+                card.style.transform = `perspective(1000px) rotateX(${xRotation}deg) rotateY(${yRotation}deg) scale(1.05)`;
+            });
+
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale(1)';
+            });
+        });
+    </script>
+</body>
+</html>
